@@ -3,3 +3,11 @@
 ################################################################################
 
 /.vs
+/src/GroupClasses/.vs/GroupClasses
+/src/GroupClasses/GroupClasses/bin/Debug/netstandard2.0
+/src/GroupClasses/GroupClasses/obj/Debug/netstandard2.0
+/src/GroupClasses/GroupClasses/obj/Release/netstandard2.0
+/src/GroupClasses/GroupClasses.UWP/bin/x64/Debug
+/src/GroupClasses/GroupClasses.UWP/obj
+/src/GroupClasses/GroupClasses.WPF/obj
+/src/GroupClasses/packages
