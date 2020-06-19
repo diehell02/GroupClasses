@@ -11,3 +11,7 @@
 /src/GroupClasses/GroupClasses.UWP/obj
 /src/GroupClasses/GroupClasses.WPF/obj
 /src/GroupClasses/packages
+/src/GroupClasses/GroupClasses/obj
+/src/GroupClasses/GroupClasses.Library/obj
+/src/GroupClasses/GroupClasses.UITests/obj
+/src/GroupClasses/GroupClasses.WPF/bin/Debug
