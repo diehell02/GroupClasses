@@ -1,9 +1,11 @@
-﻿using System;
+﻿using GroupClasses.Library.Datas;
+using System;
 using System.Collections.Generic;
+using System.Text;
 
-namespace GroupClasses.Library.Datas
+namespace GroupClasses.Library.Service
 {
-    public static class DataValues
+    class DataService
     {
         private static List<DataValue> values = new List<DataValue>();
 

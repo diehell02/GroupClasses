@@ -33,7 +33,7 @@ namespace GroupClasses.Library.Datas
 
         public void Flush()
         {
-            var tempValues = new object[values.Count];
+            var tempValues = new object[values.Select(n => n.Key.Id).Max()];
 
             foreach(var value in values)
             {

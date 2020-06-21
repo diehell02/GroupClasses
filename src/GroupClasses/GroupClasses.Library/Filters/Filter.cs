@@ -17,7 +17,13 @@ namespace GroupClasses.Library.Filters
             set;
         }
 
-        public int Weight
+        public int Weighting
+        {
+            get;
+            set;
+        }
+
+        public int VarianceLimit
         {
             get;
             set;
