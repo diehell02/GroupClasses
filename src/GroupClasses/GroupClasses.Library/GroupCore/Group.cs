@@ -18,10 +18,13 @@ namespace GroupClasses.Library.GroupCore
 
             public decimal[] Weight;
 
-            public Class(Data[] datas)
+            IFilterService FilterService;
+
+            public Class(Data[] datas, IFilterService filterService)
             {
                 Datas = datas;
                 Weight = new decimal[datas.Length];
+                FilterService = filterService;
             }
 
             public void InitWeightValues()
@@ -91,48 +94,45 @@ namespace GroupClasses.Library.GroupCore
             }
         }
 
-        public async Task<List<List<Data>>> Grouping(List<Data> datas,
-            int groupCount)
-        {
-            await Task.Yield();
-
-            return null;
-        }
-
         Random random = new Random();
+        IDataService DataService = null;
+        IFilterService FilterService = null;
 
-        public Group()
+        public Group(IDataService dataService, IFilterService filterService)
         {
+            DataService = dataService;
+            FilterService = filterService;
         }
 
         public async Task<Data[][]> Grouping(Data[] datas,
             int groupCount)
         {
-            await Task.Yield();
-
-            int count = 100000;
-            decimal minWeight = decimal.MaxValue;
-            Dictionary<int, decimal> weightDic = new Dictionary<int, decimal>();
-
-            Class[] classes = initClasses(datas, groupCount);
-            Class[] result = new Class[classes.Length];
-
-            while (count > 0)
+            return await Task.Run(() =>
             {
-                classes = Swap(classes, datas.Length);
+                int count = 100000;
+                decimal minWeight = decimal.MaxValue;
+                Dictionary<int, decimal> weightDic = new Dictionary<int, decimal>();
 
-                var groupResult =  CalculateWeight(classes);
+                Class[] classes = initClasses(datas, groupCount);
+                Class[] result = new Class[classes.Length];
 
-                if (groupResult.SumVariance < minWeight && IsPass(groupResult))
+                while (count > 0)
                 {
-                    minWeight = groupResult.SumVariance;
-                    Array.Copy(classes, result, classes.Length);
+                    classes = Swap(classes, datas.Length);
+
+                    var groupResult = CalculateWeight(classes);
+
+                    if (groupResult.SumVariance < minWeight && IsPass(groupResult))
+                    {
+                        minWeight = groupResult.SumVariance;
+                        Array.Copy(classes, result, classes.Length);
+                    }
+
+                    count--;
                 }
 
-                count--;
-            }
-
-            return result.Select(@class => @class.Datas).ToArray();
+                return result.Select(@class => @class.Datas).ToArray();
+            });
         }
 
         private bool IsPass(GroupResult groupResult)
@@ -228,7 +228,7 @@ namespace GroupClasses.Library.GroupCore
 
             for(int i = 0; i < datasList.Length; i++)
             {
-                classes[i] = new Class(datasList[i]);
+                classes[i] = new Class(datasList[i], FilterService);
             }
 
             return classes;

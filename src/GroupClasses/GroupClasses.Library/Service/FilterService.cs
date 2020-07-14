@@ -5,16 +5,16 @@ using System.Text;
 
 namespace GroupClasses.Library.Service
 {
-    class FilterService
+    public class FilterService: IFilterService
     {
-        private static List<Filter> filters = new List<Filter>();
+        private List<Filter> filters = new List<Filter>();
 
-        public static IReadOnlyList<Filter> Filters
+        public IReadOnlyList<Filter> Filters
         {
             get => filters;
         }
 
-        public static void AddFilter(Filter filter)
+        public void AddFilter(Filter filter)
         {
             filters.Add(filter);
         }

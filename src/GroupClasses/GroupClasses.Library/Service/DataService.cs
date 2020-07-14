@@ -5,16 +5,16 @@ using System.Text;
 
 namespace GroupClasses.Library.Service
 {
-    class DataService
+    public class DataService : IDataService
     {
-        private static List<DataValue> values = new List<DataValue>();
+        private List<DataValue> values = new List<DataValue>();
 
-        public static IReadOnlyList<DataValue> Values
+        public IReadOnlyList<DataValue> Values
         {
             get => values;
         }
 
-        public static void AddValue(DataValue dataValue)
+        public void AddValue(DataValue dataValue)
         {
             values.Add(dataValue);
         }

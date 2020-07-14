@@ -1,0 +1,742 @@
+﻿[
+  {
+    "Name": "Cade",
+    "Values": [
+      {
+        "DataValue": {
+          "Id": 1,
+          "Name": "段位",
+          "Type": "Number"
+        },
+        "Value": 61
+      },
+      {
+        "DataValue": {
+          "Id": 2,
+          "Name": "胜率",
+          "Type": "Number"
+        },
+        "Value": 0.657
+      },
+      {
+        "DataValue": {
+          "Id": 3,
+          "Name": "平均分",
+          "Type": "Number"
+        },
+        "Value": 10.2
+      },
+      {
+        "DataValue": {
+          "Id": 4,
+          "Name": "战斗力",
+          "Type": "Number"
+        },
+        "Value": 70124
+      }
+    ]
+  },
+  {
+    "Name": "Sherry",
+    "Values": [
+      {
+        "DataValue": {
+          "Id": 1,
+          "Name": "段位",
+          "Type": "Number"
+        },
+        "Value": 47
+      },
+      {
+        "DataValue": {
+          "Id": 2,
+          "Name": "胜率",
+          "Type": "Number"
+        },
+        "Value": 0.571
+      },
+      {
+        "DataValue": {
+          "Id": 3,
+          "Name": "平均分",
+          "Type": "Number"
+        },
+        "Value": 9.4
+      },
+      {
+        "DataValue": {
+          "Id": 4,
+          "Name": "战斗力",
+          "Type": "Number"
+        },
+        "Value": 50976
+      }
+    ]
+  },
+  {
+    "Name": "A",
+    "Values": [
+      {
+        "DataValue": {
+          "Id": 1,
+          "Name": "段位",
+          "Type": "Number"
+        },
+        "Value": 50
+      },
+      {
+        "DataValue": {
+          "Id": 2,
+          "Name": "胜率",
+          "Type": "Number"
+        },
+        "Value": 0.6
+      },
+      {
+        "DataValue": {
+          "Id": 3,
+          "Name": "平均分",
+          "Type": "Number"
+        },
+        "Value": 9.9
+      },
+      {
+        "DataValue": {
+          "Id": 4,
+          "Name": "战斗力",
+          "Type": "Number"
+        },
+        "Value": 56802
+      }
+    ]
+  },
+  {
+    "Name": "B",
+    "Values": [
+      {
+        "DataValue": {
+          "Id": 1,
+          "Name": "段位",
+          "Type": "Number"
+        },
+        "Value": 50
+      },
+      {
+        "DataValue": {
+          "Id": 2,
+          "Name": "胜率",
+          "Type": "Number"
+        },
+        "Value": 0.488
+      },
+      {
+        "DataValue": {
+          "Id": 3,
+          "Name": "平均分",
+          "Type": "Number"
+        },
+        "Value": 9.6
+      },
+      {
+        "DataValue": {
+          "Id": 4,
+          "Name": "战斗力",
+          "Type": "Number"
+        },
+        "Value": 59094
+      }
+    ]
+  },
+  {
+    "Name": "C",
+    "Values": [
+      {
+        "DataValue": {
+          "Id": 1,
+          "Name": "段位",
+          "Type": "Number"
+        },
+        "Value": 50
+      },
+      {
+        "DataValue": {
+          "Id": 2,
+          "Name": "胜率",
+          "Type": "Number"
+        },
+        "Value": 0.488
+      },
+      {
+        "DataValue": {
+          "Id": 3,
+          "Name": "平均分",
+          "Type": "Number"
+        },
+        "Value": 9.6
+      },
+      {
+        "DataValue": {
+          "Id": 4,
+          "Name": "战斗力",
+          "Type": "Number"
+        },
+        "Value": 59094
+      }
+    ]
+  },
+  {
+    "Name": "Cade",
+    "Values": [
+      {
+        "DataValue": {
+          "Id": 1,
+          "Name": "段位",
+          "Type": "Number"
+        },
+        "Value": 61
+      },
+      {
+        "DataValue": {
+          "Id": 2,
+          "Name": "胜率",
+          "Type": "Number"
+        },
+        "Value": 0.657
+      },
+      {
+        "DataValue": {
+          "Id": 3,
+          "Name": "平均分",
+          "Type": "Number"
+        },
+        "Value": 10.2
+      },
+      {
+        "DataValue": {
+          "Id": 4,
+          "Name": "战斗力",
+          "Type": "Number"
+        },
+        "Value": 70124
+      }
+    ]
+  },
+  {
+    "Name": "Sherry",
+    "Values": [
+      {
+        "DataValue": {
+          "Id": 1,
+          "Name": "段位",
+          "Type": "Number"
+        },
+        "Value": 47
+      },
+      {
+        "DataValue": {
+          "Id": 2,
+          "Name": "胜率",
+          "Type": "Number"
+        },
+        "Value": 0.571
+      },
+      {
+        "DataValue": {
+          "Id": 3,
+          "Name": "平均分",
+          "Type": "Number"
+        },
+        "Value": 9.4
+      },
+      {
+        "DataValue": {
+          "Id": 4,
+          "Name": "战斗力",
+          "Type": "Number"
+        },
+        "Value": 50976
+      }
+    ]
+  },
+  {
+    "Name": "A",
+    "Values": [
+      {
+        "DataValue": {
+          "Id": 1,
+          "Name": "段位",
+          "Type": "Number"
+        },
+        "Value": 50
+      },
+      {
+        "DataValue": {
+          "Id": 2,
+          "Name": "胜率",
+          "Type": "Number"
+        },
+        "Value": 0.6
+      },
+      {
+        "DataValue": {
+          "Id": 3,
+          "Name": "平均分",
+          "Type": "Number"
+        },
+        "Value": 9.9
+      },
+      {
+        "DataValue": {
+          "Id": 4,
+          "Name": "战斗力",
+          "Type": "Number"
+        },
+        "Value": 56802
+      }
+    ]
+  },
+  {
+    "Name": "B",
+    "Values": [
+      {
+        "DataValue": {
+          "Id": 1,
+          "Name": "段位",
+          "Type": "Number"
+        },
+        "Value": 50
+      },
+      {
+        "DataValue": {
+          "Id": 2,
+          "Name": "胜率",
+          "Type": "Number"
+        },
+        "Value": 0.488
+      },
+      {
+        "DataValue": {
+          "Id": 3,
+          "Name": "平均分",
+          "Type": "Number"
+        },
+        "Value": 9.6
+      },
+      {
+        "DataValue": {
+          "Id": 4,
+          "Name": "战斗力",
+          "Type": "Number"
+        },
+        "Value": 59094
+      }
+    ]
+  },
+  {
+    "Name": "C",
+    "Values": [
+      {
+        "DataValue": {
+          "Id": 1,
+          "Name": "段位",
+          "Type": "Number"
+        },
+        "Value": 50
+      },
+      {
+        "DataValue": {
+          "Id": 2,
+          "Name": "胜率",
+          "Type": "Number"
+        },
+        "Value": 0.488
+      },
+      {
+        "DataValue": {
+          "Id": 3,
+          "Name": "平均分",
+          "Type": "Number"
+        },
+        "Value": 9.6
+      },
+      {
+        "DataValue": {
+          "Id": 4,
+          "Name": "战斗力",
+          "Type": "Number"
+        },
+        "Value": 59094
+      }
+    ]
+  },
+  {
+    "Name": "Cade",
+    "Values": [
+      {
+        "DataValue": {
+          "Id": 1,
+          "Name": "段位",
+          "Type": "Number"
+        },
+        "Value": 61
+      },
+      {
+        "DataValue": {
+          "Id": 2,
+          "Name": "胜率",
+          "Type": "Number"
+        },
+        "Value": 0.657
+      },
+      {
+        "DataValue": {
+          "Id": 3,
+          "Name": "平均分",
+          "Type": "Number"
+        },
+        "Value": 10.2
+      },
+      {
+        "DataValue": {
+          "Id": 4,
+          "Name": "战斗力",
+          "Type": "Number"
+        },
+        "Value": 70124
+      }
+    ]
+  },
+  {
+    "Name": "Sherry",
+    "Values": [
+      {
+        "DataValue": {
+          "Id": 1,
+          "Name": "段位",
+          "Type": "Number"
+        },
+        "Value": 47
+      },
+      {
+        "DataValue": {
+          "Id": 2,
+          "Name": "胜率",
+          "Type": "Number"
+        },
+        "Value": 0.571
+      },
+      {
+        "DataValue": {
+          "Id": 3,
+          "Name": "平均分",
+          "Type": "Number"
+        },
+        "Value": 9.4
+      },
+      {
+        "DataValue": {
+          "Id": 4,
+          "Name": "战斗力",
+          "Type": "Number"
+        },
+        "Value": 50976
+      }
+    ]
+  },
+  {
+    "Name": "A",
+    "Values": [
+      {
+        "DataValue": {
+          "Id": 1,
+          "Name": "段位",
+          "Type": "Number"
+        },
+        "Value": 50
+      },
+      {
+        "DataValue": {
+          "Id": 2,
+          "Name": "胜率",
+          "Type": "Number"
+        },
+        "Value": 0.6
+      },
+      {
+        "DataValue": {
+          "Id": 3,
+          "Name": "平均分",
+          "Type": "Number"
+        },
+        "Value": 9.9
+      },
+      {
+        "DataValue": {
+          "Id": 4,
+          "Name": "战斗力",
+          "Type": "Number"
+        },
+        "Value": 56802
+      }
+    ]
+  },
+  {
+    "Name": "B",
+    "Values": [
+      {
+        "DataValue": {
+          "Id": 1,
+          "Name": "段位",
+          "Type": "Number"
+        },
+        "Value": 50
+      },
+      {
+        "DataValue": {
+          "Id": 2,
+          "Name": "胜率",
+          "Type": "Number"
+        },
+        "Value": 0.488
+      },
+      {
+        "DataValue": {
+          "Id": 3,
+          "Name": "平均分",
+          "Type": "Number"
+        },
+        "Value": 9.6
+      },
+      {
+        "DataValue": {
+          "Id": 4,
+          "Name": "战斗力",
+          "Type": "Number"
+        },
+        "Value": 59094
+      }
+    ]
+  },
+  {
+    "Name": "C",
+    "Values": [
+      {
+        "DataValue": {
+          "Id": 1,
+          "Name": "段位",
+          "Type": "Number"
+        },
+        "Value": 50
+      },
+      {
+        "DataValue": {
+          "Id": 2,
+          "Name": "胜率",
+          "Type": "Number"
+        },
+        "Value": 0.488
+      },
+      {
+        "DataValue": {
+          "Id": 3,
+          "Name": "平均分",
+          "Type": "Number"
+        },
+        "Value": 9.6
+      },
+      {
+        "DataValue": {
+          "Id": 4,
+          "Name": "战斗力",
+          "Type": "Number"
+        },
+        "Value": 59094
+      }
+    ]
+  },
+  {
+    "Name": "Cade",
+    "Values": [
+      {
+        "DataValue": {
+          "Id": 1,
+          "Name": "段位",
+          "Type": "Number"
+        },
+        "Value": 61
+      },
+      {
+        "DataValue": {
+          "Id": 2,
+          "Name": "胜率",
+          "Type": "Number"
+        },
+        "Value": 0.657
+      },
+      {
+        "DataValue": {
+          "Id": 3,
+          "Name": "平均分",
+          "Type": "Number"
+        },
+        "Value": 10.2
+      },
+      {
+        "DataValue": {
+          "Id": 4,
+          "Name": "战斗力",
+          "Type": "Number"
+        },
+        "Value": 70124
+      }
+    ]
+  },
+  {
+    "Name": "Sherry",
+    "Values": [
+      {
+        "DataValue": {
+          "Id": 1,
+          "Name": "段位",
+          "Type": "Number"
+        },
+        "Value": 47
+      },
+      {
+        "DataValue": {
+          "Id": 2,
+          "Name": "胜率",
+          "Type": "Number"
+        },
+        "Value": 0.571
+      },
+      {
+        "DataValue": {
+          "Id": 3,
+          "Name": "平均分",
+          "Type": "Number"
+        },
+        "Value": 9.4
+      },
+      {
+        "DataValue": {
+          "Id": 4,
+          "Name": "战斗力",
+          "Type": "Number"
+        },
+        "Value": 50976
+      }
+    ]
+  },
+  {
+    "Name": "A",
+    "Values": [
+      {
+        "DataValue": {
+          "Id": 1,
+          "Name": "段位",
+          "Type": "Number"
+        },
+        "Value": 50
+      },
+      {
+        "DataValue": {
+          "Id": 2,
+          "Name": "胜率",
+          "Type": "Number"
+        },
+        "Value": 0.6
+      },
+      {
+        "DataValue": {
+          "Id": 3,
+          "Name": "平均分",
+          "Type": "Number"
+        },
+        "Value": 9.9
+      },
+      {
+        "DataValue": {
+          "Id": 4,
+          "Name": "战斗力",
+          "Type": "Number"
+        },
+        "Value": 56802
+      }
+    ]
+  },
+  {
+    "Name": "B",
+    "Values": [
+      {
+        "DataValue": {
+          "Id": 1,
+          "Name": "段位",
+          "Type": "Number"
+        },
+        "Value": 50
+      },
+      {
+        "DataValue": {
+          "Id": 2,
+          "Name": "胜率",
+          "Type": "Number"
+        },
+        "Value": 0.488
+      },
+      {
+        "DataValue": {
+          "Id": 3,
+          "Name": "平均分",
+          "Type": "Number"
+        },
+        "Value": 9.6
+      },
+      {
+        "DataValue": {
+          "Id": 4,
+          "Name": "战斗力",
+          "Type": "Number"
+        },
+        "Value": 59094
+      }
+    ]
+  },
+  {
+    "Name": "C",
+    "Values": [
+      {
+        "DataValue": {
+          "Id": 1,
+          "Name": "段位",
+          "Type": "Number"
+        },
+        "Value": 50
+      },
+      {
+        "DataValue": {
+          "Id": 2,
+          "Name": "胜率",
+          "Type": "Number"
+        },
+        "Value": 0.488
+      },
+      {
+        "DataValue": {
+          "Id": 3,
+          "Name": "平均分",
+          "Type": "Number"
+        },
+        "Value": 9.6
+      },
+      {
+        "DataValue": {
+          "Id": 4,
+          "Name": "战斗力",
+          "Type": "Number"
+        },
+        "Value": 59094
+      }
+    ]
+  }
+]
