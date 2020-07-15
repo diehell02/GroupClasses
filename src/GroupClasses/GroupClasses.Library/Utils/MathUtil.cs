@@ -29,13 +29,22 @@ namespace GroupClasses.Library.Utils
             return sum / values.Length;
         }
 
+        public static decimal Variance(decimal[] values, decimal weight)
+        {
+            decimal[] _values = values;
+
+            for(int i = 0; i < _values.Length; i++)
+            {
+                _values[i] *= weight;
+            }
+
+            return Variance(_values);
+        }
+
         public static decimal Variance(decimal[] values)
         {
             decimal sum = 0;
-            decimal avg = 0;
-
-            avg = Average(values);
-
+            decimal avg = Average(values);
             foreach (var value in values)
             {
                 sum += Convert.ToDecimal(Math.Pow(Convert.ToDouble(value - avg), 2.0d));

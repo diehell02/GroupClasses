@@ -25,6 +25,7 @@ namespace GroupClasses.Library.GroupCore
                 Datas = datas;
                 Weight = new decimal[datas.Length];
                 FilterService = filterService;
+                InitWeightValues();
             }
 
             public void InitWeightValues()
@@ -252,7 +253,7 @@ namespace GroupClasses.Library.GroupCore
                     values[i] = value;
                 }
 
-                decimal variance = MathUtil.Variance(values) * filter.Weighting;
+                decimal variance = MathUtil.Variance(values, filter.Weighting);
 
                 _weightDic.Add(filter.DataValue.Id, variance);
 

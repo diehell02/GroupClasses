@@ -101,8 +101,8 @@ namespace GroupClasses.NUnitTests
                 {
                     DataValue = new DataValue() { Id = Convert.ToInt32(row.GetCell(0).NumericCellValue) },
                     Type = Library.Filters.FilterType.Average,
-                    Weighting = 1,
-                    VarianceLimit = 10
+                    Weighting = Convert.ToDecimal(row.GetCell(2).NumericCellValue),
+                    VarianceLimit = Convert.ToInt32(row.GetCell(3).NumericCellValue)
                 });
             }
         }

@@ -22,7 +22,7 @@ namespace GroupClasses.NUnitTests
 
             var group = new Group(dataService, filterService);
 
-            group.Grouping(datas, 3);
+            Console.WriteLine(group.Grouping(datas, 3).Result);
         }
     }
 }

@@ -17,7 +17,7 @@ namespace GroupClasses.Library.Filters
             set;
         }
 
-        public int Weighting
+        public decimal Weighting
         {
             get;
             set;
