@@ -1,7 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:d="http://xamarin.com/schemas/2014/forms/design" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="GroupClasses.MainPage">
-    <StackLayout>
-        <!-- Place new controls here -->
-        <Label Text="Welcome to Xamarin.Forms!" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" />
+    <StackLayout Orientation="Vertical">
+        <StackLayout Orientation="Horizontal">
+            <Label Text="Import:"></Label>
+            <Entry Placeholder="Input your path of data file." Text="{Binding DataPath}"></Entry>
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+            <Label Text="ClassNumber:"></Label>
+            <Entry Placeholder="Please enter the ClassNumber" Text="{Binding ClassNumber}"></Entry>
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+            <Button Text="Import" Command="{Binding ImportClickCommand}"></Button>
+            <Button Text="Export" Command="{Binding ExportClickCommand}"></Button>
+        </StackLayout>
+        
+        <Editor Placeholder="Group result is here." IsReadOnly="True"
+                Text="{Binding GroupResultText}"></Editor>
     </StackLayout>
 </ContentPage>

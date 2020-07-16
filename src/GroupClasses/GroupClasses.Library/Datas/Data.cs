@@ -9,11 +9,6 @@ namespace GroupClasses.Library.Datas
         private Dictionary<DataValue, object> values =
             new Dictionary<DataValue, object>();
 
-        public Data(string name)
-        {
-            Name = name;
-        }
-
         private bool Verify(DataValue dataValue)
         {
             var result = values.Where(value => value.Key.Id == dataValue.Id);
@@ -38,23 +33,17 @@ namespace GroupClasses.Library.Datas
 
         public void Flush()
         {
-            var tempValues = new object[values.Select(n => n.Key.Id).Max() + 1];
+            var tempValues = new KeyValuePair<DataValue, object>[values.Select(n => n.Key.Id).Max() + 1];
 
             foreach(var value in values)
             {
-                tempValues[value.Key.Id] = value.Value;
+                tempValues[value.Key.Id] = value;
             }
 
             Values = tempValues;
         }
 
-        public string Name
-        {
-            get;
-            private set;
-        }
-
-        public object[] Values
+        public KeyValuePair<DataValue, object>[] Values
         {
             get;
             private set;

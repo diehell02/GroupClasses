@@ -44,7 +44,7 @@ namespace GroupClasses.Library.GroupCore
                             {
                                 case DataValueType.Number:
                                     weight = Datas.Select(data => 
-                                    Convert.ToDecimal(data.Values[dataValueId]))
+                                    Convert.ToDecimal(data.Values[dataValueId].Value))
                                         .Average();
                                     break;
                             }
@@ -54,7 +54,7 @@ namespace GroupClasses.Library.GroupCore
                             {
                                 case DataValueType.String:
                                     weight = Datas.Select(data => 
-                                    Convert.ToString(data.Values[dataValueId]))
+                                    Convert.ToString(data.Values[dataValueId].Value))
                                         .Count()
                                         / Datas.Length;
                                     break;
