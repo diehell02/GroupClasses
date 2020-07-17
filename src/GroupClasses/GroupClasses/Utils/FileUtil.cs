@@ -8,7 +8,7 @@ using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
 using System.Linq;
 
-namespace GroupClasses.NUnitTests
+namespace GroupClasses.Utils
 {
     public class FileUtil
     {
