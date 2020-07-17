@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GroupClasses.ViewModel;
 using Xamarin.Forms;
 
 namespace GroupClasses
@@ -16,10 +17,8 @@ namespace GroupClasses
         public MainPage()
         {
             InitializeComponent();
-        }
 
-        void Button_Clicked(System.Object sender, System.EventArgs e)
-        {
+            BindingContext = new MainPageViewModel();
         }
     }
 }

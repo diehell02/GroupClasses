@@ -1,10 +1,10 @@
 ﻿using System;
+using System.Threading.Tasks;
 using GroupClasses.Library.Datas;
 using GroupClasses.Library.GroupCore;
 using GroupClasses.Library.Service;
-using GroupClasses.Utils;
-using Plugin.FilePicker;
-using Plugin.FilePicker.Abstractions;
+using GroupClasses.Service;
+using Xamarin.Forms;
 
 namespace GroupClasses.ViewModel
 {
@@ -42,17 +42,15 @@ namespace GroupClasses.ViewModel
         {
             try
             {
-                FileData fileData = await CrossFilePicker.Current.PickFile();
-                if (fileData == null)
-                    return; // user canceled file picking
-
-                string filePath = fileData.FilePath;
+                string filePath =
+                    await Task.Run(() =>
+                    DependencyService.Get<IFilePickerService>()?.PickFilePath());
 
                 Console.WriteLine("File name chosen: " + filePath);
 
                 dataService = new DataService();
                 filterService = new FilterService();
-                var datas = FileUtil.Load(filePath, dataService, filterService);
+                var datas = DependencyService.Get<IExcelService>()?.Load(filePath, dataService, filterService);
 
                 var group = new Group(dataService, filterService);
 
@@ -66,13 +64,13 @@ namespace GroupClasses.ViewModel
 
         public async void ExportClickCommand()
         {
-            FileData fileData = await CrossFilePicker.Current.PickFile();
-            if (fileData == null)
-                return; // user canceled file picking
+            string filePath =
+                    await Task.Run(() =>
+                    DependencyService.Get<IFilePickerService>()?.PickFilePath());
 
-            string filePath = fileData.FilePath;
+            Console.WriteLine("File name chosen: " + filePath);
 
-            FileUtil.Save(filePath, dataResults, dataService);
+            DependencyService.Get<IExcelService>()?.Save(filePath, dataResults, dataService);
         }
     }
 }

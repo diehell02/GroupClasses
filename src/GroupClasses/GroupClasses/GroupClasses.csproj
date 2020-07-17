@@ -13,14 +13,15 @@
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="4.7.0.968" />
     <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
-    <PackageReference Include="Xamarin.Plugin.FilePicker" Version="2.1.41" />
-    <PackageReference Include="NPOI" Version="2.5.1" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModel\" />
-    <Folder Include="Utils\" />
+    <Folder Include="Service\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GroupClasses.Library\GroupClasses.Library.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Utils\FileUtil.cs" />
   </ItemGroup>
 </Project>
