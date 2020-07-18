@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using GroupClasses.Library.Datas;
 using GroupClasses.Library.GroupCore;
 using GroupClasses.Library.Service;
@@ -38,39 +39,59 @@ namespace GroupClasses.ViewModel
         private FilterService filterService;
         private Data[][] dataResults;
 
-        public async void ImportClickCommand()
+        public ICommand ImportClickCommand
         {
-            try
-            {
-                string filePath =
-                    await Task.Run(() =>
-                    DependencyService.Get<IFilePickerService>()?.PickFilePath());
-
-                Console.WriteLine("File name chosen: " + filePath);
-
-                dataService = new DataService();
-                filterService = new FilterService();
-                var datas = DependencyService.Get<IExcelService>()?.Load(filePath, dataService, filterService);
-
-                var group = new Group(dataService, filterService);
-
-                dataResults = await group.Grouping(datas, ClassNumber);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Exception choosing file: " + ex.ToString());
-            }
+            get;
+            private set;
         }
 
-        public async void ExportClickCommand()
+        public ICommand ExportClickCommand
         {
-            string filePath =
+            get;
+            private set;
+        }
+
+        public MainPageViewModel()
+        {
+            ImportClickCommand = new Command(execute: async () =>
+            {
+                try
+                {
+                    await Device.InvokeOnMainThreadAsync(async () =>
+                    {
+                        string filePath = DependencyService.Get<IFilePickerService>()?.PickFilePath();
+
+                        Console.WriteLine("File name chosen: " + filePath);
+
+                        dataService = new DataService();
+                        filterService = new FilterService();
+                        var datas = DependencyService.Get<IExcelService>()
+                        ?.Load(filePath, dataService, filterService);
+
+                        var group = new Group(dataService, filterService);
+
+                        dataResults = await group.Grouping(datas, ClassNumber);
+                    });
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Exception choosing file: " + ex.ToString());
+                }
+            });
+
+            ExportClickCommand = new Command(execute: async () =>
+            {
+                await Device.InvokeOnMainThreadAsync(async () =>
+                {
+                    string filePath =
                     await Task.Run(() =>
                     DependencyService.Get<IFilePickerService>()?.PickFilePath());
 
-            Console.WriteLine("File name chosen: " + filePath);
+                    Console.WriteLine("File name chosen: " + filePath);
 
-            DependencyService.Get<IExcelService>()?.Save(filePath, dataResults, dataService);
+                    DependencyService.Get<IExcelService>()?.Save(filePath, dataResults, dataService);
+                });
+            });
         }
     }
 }

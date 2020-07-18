@@ -4,95 +4,110 @@ using System.IO;
 using System.Linq;
 using GroupClasses.Library.Datas;
 using GroupClasses.Library.Service;
-using OfficeOpenXml;
+using GroupClasses.Service;
+using NPOI.HSSF.UserModel;
+using NPOI.SS.UserModel;
+using NPOI.XSSF.UserModel;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(GroupClasses.Mac.Service.ExcelService))]
 namespace GroupClasses.Mac.Service
 {
-    public class ExcelService
+    public class ExcelService : IExcelService
     {
         public Data[] Load(string path, IDataService dataService, IFilterService filterService)
         {
+            IWorkbook workbook = null;
+
             var fs = File.OpenRead(path);
-            Data[] datas = null;
 
-            using (ExcelPackage package = new ExcelPackage(fs))
+            if (path.IndexOf(".xlsx") > 0) // 2007版本 
             {
-                var dataSheet = package.Workbook.Worksheets[0];
-                var filterSheet = package.Workbook.Worksheets[1];
-
-                LoadFilters(filterSheet, filterService);
-                LoadHeaders(dataSheet, dataService, filterService);
-
-                datas = LoadDatas(dataSheet, dataService);
+                workbook = new XSSFWorkbook(fs);
+            }
+            else if (path.IndexOf(".xls") > 0) // 2003版本
+            {
+                workbook = new HSSFWorkbook(fs);
             }
 
-            return datas;
+            ISheet sheet = workbook.GetSheetAt(0);
+
+            LoadFilters(workbook.GetSheetAt(1), filterService);
+            LoadHeaders(sheet, dataService, filterService);
+
+            return LoadDatas(sheet, dataService);
         }
 
-        private void LoadHeaders(ExcelWorksheet workSheet, IDataService dataService, IFilterService filterService)
+        private void LoadHeaders(ISheet sheet, IDataService dataService, IFilterService filterService)
         {
-            var start = workSheet.Dimension.Start;
-            var end = workSheet.Dimension.End;
+            IRow headerRow = sheet.GetRow(0);
 
-            for (var i = 0; i < end.Column; i++)
+            if (headerRow != null)
             {
-                var id = i;
-                var name = workSheet.Cells[0, i].Value.ToString();
-
-                var filter = filterService.Filters.Where(_filter => _filter.DataValue.Name == name).FirstOrDefault();
-                DataValue dataValue = null;
-
-                if (filter != null)
+                for (var i = 0; i < headerRow.LastCellNum; i++)
                 {
-                    dataValue = new DataValue()
-                    {
-                        Id = i,
-                        Name = name,
-                        Type = DataValueType.Number
-                    };
-                    filter.DataValue = dataValue;
-                }
-                else
-                {
-                    dataValue = new DataValue()
-                    {
-                        Id = i,
-                        Name = name,
-                        Type = DataValueType.String
-                    };
-                }
+                    var cell = headerRow.GetCell(i);
+                    var id = i;
+                    var name = headerRow.GetCell(i).StringCellValue;
 
-                dataService.AddValue(dataValue);
+                    var filter = filterService.Filters.Where(_filter => _filter.DataValue.Name == name).FirstOrDefault();
+                    DataValue dataValue = null;
+
+                    if (filter != null)
+                    {
+                        dataValue = new DataValue()
+                        {
+                            Id = i,
+                            Name = headerRow.GetCell(i).StringCellValue,
+                            Type = DataValueType.Number
+                        };
+                        filter.DataValue = dataValue;
+                    }
+                    else
+                    {
+                        dataValue = new DataValue()
+                        {
+                            Id = i,
+                            Name = headerRow.GetCell(i).StringCellValue,
+                            Type = DataValueType.String
+                        };
+                    }
+
+                    dataService.AddValue(dataValue);
+                }
             }
         }
 
-        private Data[] LoadDatas(ExcelWorksheet workSheet, IDataService dataService)
+        private Data[] LoadDatas(ISheet sheet, IDataService dataService)
         {
             List<Data> datas = new List<Data>();
 
-            if (workSheet != null)
+            if (sheet != null)
             {
-                var start = workSheet.Dimension.Start;
-                var end = workSheet.Dimension.End;
-                int index = start.Row + 1;
+                int index = 1;
 
-                while (index <= end.Row)
+                while (index <= sheet.LastRowNum)
                 {
+                    IRow cells = sheet.GetRow(index++);
+
+                    if (cells is null)
+                    {
+                        continue;
+                    }
+
                     Data data = new Data();
 
-                    for (int i = 0; i < end.Column; i++)
+                    for (int i = 0; i < cells.LastCellNum; i++)
                     {
                         var dataValue = dataService.Values.Where(_dataValue => _dataValue.Id == i).First();
 
                         switch (dataValue.Type)
                         {
                             case DataValueType.Number:
-                                data.AddValue(dataValue, Convert.ToDecimal(workSheet.Cells[index, i].Value));
+                                data.AddValue(dataValue, cells.GetCell(i).NumericCellValue);
                                 break;
                             case DataValueType.String:
-                                data.AddValue(dataValue, workSheet.Cells[index, i].Value.ToString());
+                                data.AddValue(dataValue, cells.GetCell(i).StringCellValue);
                                 break;
                         }
                     }
@@ -100,80 +115,84 @@ namespace GroupClasses.Mac.Service
                     data.Flush();
 
                     datas.Add(data);
-
-                    index++;
                 }
             }
 
             return datas.ToArray();
         }
 
-        private void LoadFilters(ExcelWorksheet workSheet, IFilterService filterService)
+        private void LoadFilters(ISheet sheet, IFilterService filterService)
         {
-            var start = workSheet.Dimension.Start;
-            var end = workSheet.Dimension.End;
-
-            for (var i = 1; i <= end.Row; i++)
+            for (var i = 1; i <= sheet.LastRowNum; i++)
             {
+                var row = sheet.GetRow(i);
+
                 filterService.AddFilter(new Library.Filters.Filter()
                 {
-                    DataValue = new DataValue() { Name = workSheet.Cells[i, 0].Value.ToString() },
+                    DataValue = new DataValue() { Name = row.GetCell(0).StringCellValue },
                     Type = Library.Filters.FilterType.Average,
-                    Weighting = Convert.ToDecimal(workSheet.Cells[i, 2].Value),
-                    VarianceLimit = Convert.ToInt32(workSheet.Cells[i, 3].Value)
+                    Weighting = Convert.ToDecimal(row.GetCell(2).NumericCellValue),
+                    VarianceLimit = Convert.ToInt32(row.GetCell(3).NumericCellValue)
                 });
             }
         }
 
         public void Save(string path, Data[][] datas, IDataService dataService)
         {
+            IWorkbook workbook = null;
+
             var fs = File.OpenWrite(path);
 
-            using (ExcelPackage package = new ExcelPackage(fs))
+            if (path.IndexOf(".xlsx") > 0) // 2007版本 
             {
-                for (var i = 0; i < datas.Length; i++)
+                workbook = new XSSFWorkbook();
+            }
+            else if (path.IndexOf(".xls") > 0) // 2003版本
+            {
+                workbook = new HSSFWorkbook();
+            }
+
+            for (var i = 0; i < datas.Length; i++)
+            {
+                var _class = datas[i];
+                ISheet sheet = workbook.CreateSheet($"Class{i}");
+
+                int rowIndex = 0;
+                int colIndex = 0;
+
+                var row = sheet.CreateRow(rowIndex++);
+
+                foreach (var header in dataService.Values)
                 {
-                    var _class = datas[i];
-                    var worksheet = package.Workbook.Worksheets.Add($"Class{i}");
-
-                    int rowIndex = 0;
-                    int colIndex = 0;
-
-                    foreach (var header in dataService.Values)
-                    {
-                        worksheet.Cells[rowIndex, colIndex++].Value = header.Name;
-                    }
-
-                    rowIndex++;
-
-                    foreach (var data in _class)
-                    {
-                        colIndex = 0;
-
-                        for (int z = 0; z < data.Values.Count(); z++)
-                        {
-                            var value = data.Values[z];
-
-                            switch (value.Key.Type)
-                            {
-                                case DataValueType.String:
-                                    worksheet.Cells[z, colIndex++].Value = value.Value.ToString();
-                                    break;
-                                case DataValueType.Number:
-                                    worksheet.Cells[z, colIndex++].Value = Convert.ToDouble(value.Value);
-                                    break;
-                                default:
-                                    worksheet.Cells[z, colIndex++].Value = value.Value.ToString();
-                                    break;
-                            }
-                        }
-
-                        rowIndex++;
-                    }
+                    row.CreateCell(colIndex++).SetCellValue(header.Name);
                 }
 
-                package.Save();
+                foreach (var data in _class)
+                {
+                    colIndex = 0;
+                    row = sheet.CreateRow(rowIndex++);
+
+                    for (int z = 0; z < data.Values.Count(); z++)
+                    {
+                        var value = data.Values[z];
+
+                        switch (value.Key.Type)
+                        {
+                            case DataValueType.String:
+                                row.CreateCell(colIndex++).SetCellValue(value.Value.ToString());
+                                break;
+                            case DataValueType.Number:
+                                row.CreateCell(colIndex++).SetCellValue(Convert.ToDouble(value.Value));
+                                break;
+                            default:
+                                row.CreateCell(colIndex++).SetCellValue(value.Value.ToString());
+                                break;
+                        }
+                    }
+                }
             }
+
+            workbook.Write(fs);
 
             fs.Close();
         }

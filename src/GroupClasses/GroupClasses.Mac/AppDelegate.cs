@@ -3,6 +3,8 @@ using Foundation;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.MacOS;
 using GroupClasses;
+using GroupClasses.Service;
+using GroupClasses.Mac.Service;
 
 namespace GroupClasses.Mac
 {
@@ -29,6 +31,8 @@ namespace GroupClasses.Mac
         {
             Forms.Init();
             LoadApplication(new App());
+            DependencyService.Register<IExcelService, ExcelService>();
+            DependencyService.Register<IFilePickerService, FilePickerService>();
             base.DidFinishLaunching(notification);
         }
     }

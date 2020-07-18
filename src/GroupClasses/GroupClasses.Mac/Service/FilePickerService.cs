@@ -11,12 +11,19 @@ namespace GroupClasses.Mac.Service
     {
         public string PickFilePath()
         {
-            FileData fileData = CrossFilePicker.Current.PickFile().Result;
+            try
+            {
+                FileData fileData = CrossFilePicker.Current.PickFile().Result;
 
-            if (fileData == null)
-                return null; // user canceled file picking
+                if (fileData == null)
+                    return null; // user canceled file picking
 
-            return fileData.FilePath;
+                return fileData.FilePath;
+            }
+            catch(Exception ex)
+            {
+                return ex.Message;
+            }
         }
     }
 }
