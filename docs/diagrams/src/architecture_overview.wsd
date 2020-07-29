@@ -1,0 +1,18 @@
+@startuml
+
+[GroupClasses.Library] as Library
+[GroupClasses.ConsoleClient] as ConsoleClient
+[GroupClasses.BlazorServer] as BlazorServer
+[GroupClasses] as Forms
+[GroupClasses.Mac] as Mac
+[GroupClasses.UWP] as UWP
+[GroupClasses.WPF] as WPF
+
+Library --> ConsoleClient
+Library --> BlazorServer
+Library --> Forms
+Forms --> Mac
+Forms --> UWP
+Forms --> WPF
+
+@enduml

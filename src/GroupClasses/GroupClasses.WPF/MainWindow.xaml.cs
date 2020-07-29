@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GroupClasses.Service;
+using GroupClasses.WPF.Service;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,6 +30,8 @@ namespace GroupClasses.WPF
 
             Forms.Init();
             LoadApplication(new GroupClasses.App());
+            DependencyService.Register<IExcelService, ExcelService>();
+            DependencyService.Register<IFilePickerService, FilePickerService>();
         }
     }
 }

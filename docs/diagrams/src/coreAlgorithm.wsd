@@ -1,0 +1,17 @@
+@startuml
+
+InitClasses --> Swap
+
+Swap --> CalculateWeight
+
+CalculateWeight --> FilterLimit
+
+FilterLimit --> IsWeightMinimum
+
+IsWeightMinimum --> SaveResult
+
+IsWeightMinimum --> Swap
+
+SaveResult --> Swap
+
+@enduml

@@ -1,0 +1,36 @@
+@startuml
+
+class Group {
+    Data[][] Grouping(Data[] datas, int groupCount)
+}
+
+class FilterService {
+    IReadOnlyList<Filter> Filters
+}
+
+class DataService {
+    IReadOnlyList<DataValue> Values
+}
+
+class Filter {
+    DataValue DataValue
+    FilterType Type
+    decimal Weighting
+    int VarianceLimit
+}
+
+class DataValue {
+    int Id
+    string Name
+    DataValueType Type
+}
+
+enum DataValueType {
+    Number
+    String
+}
+
+Group --> FilterService
+Group --> DataService
+
+@enduml
