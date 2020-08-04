@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using GroupClasses.Library.Datas;
 using GroupClasses.Library.Service;
+using GroupClasses.Library.Filters;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
@@ -56,7 +57,7 @@ namespace GroupClasses.ConsoleClient
                         {
                             Id = i,
                             Name = headerRow.GetCell(i).StringCellValue,
-                            Type = DataValueType.Number
+                            Type = filter.Type == FilterType.Condition ? DataValueType.Binary : DataValueType.Number
                         };
                         filter.DataValue = dataValue;
                     } else
@@ -102,6 +103,9 @@ namespace GroupClasses.ConsoleClient
                             case DataValueType.Number:
                                 data.AddValue(dataValue, cells.GetCell(i).NumericCellValue);
                                 break;
+                            case DataValueType.Binary:
+                                data.AddValue(dataValue, cells.GetCell(i).ToString());
+                                break;
                             case DataValueType.String:
                                 data.AddValue(dataValue, cells.GetCell(i).StringCellValue);
                                 break;
@@ -123,10 +127,10 @@ namespace GroupClasses.ConsoleClient
             {
                 var row = sheet.GetRow(i);
 
-                filterService.AddFilter(new Library.Filters.Filter()
+                filterService.AddFilter(new Filter()
                 {
                     DataValue = new DataValue() { Name = row.GetCell(0).StringCellValue },
-                    Type = Library.Filters.FilterType.Average,
+                    Type = (FilterType)Enum.Parse(typeof(FilterType), row.GetCell(1).StringCellValue),
                     Weighting = Convert.ToDecimal(row.GetCell(2).NumericCellValue),
                     VarianceLimit = Convert.ToInt32(row.GetCell(3).NumericCellValue)
                 });

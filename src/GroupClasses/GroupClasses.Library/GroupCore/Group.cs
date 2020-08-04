@@ -23,7 +23,7 @@ namespace GroupClasses.Library.GroupCore
             public Class(Data[] datas, IFilterService filterService)
             {
                 Datas = datas;
-                Weight = new decimal[datas.Length];
+                Weight = new decimal[filterService.Filters.Max(filter => filter.DataValue.Id) + 1];
                 FilterService = filterService;
                 InitWeightValues();
             }
@@ -59,6 +59,24 @@ namespace GroupClasses.Library.GroupCore
                                         / Datas.Length;
                                     break;
                             }
+                            break;
+                        case FilterType.Condition:
+                            byte result = 0b11111;
+                            switch (dataValueType)
+                            {
+                                case DataValueType.Binary:
+                                    foreach (var data in Datas) {
+                                        result = (byte)(result | Convert.ToByte(data.Values[dataValueId].Value.ToString(), 2));
+                                    }
+                                    break;
+                            }
+
+                            //if ((result & 0b10000) == 0) weight++;
+                            //if ((result & 0b01000) == 0) weight++;
+                            //if ((result & 0b00100) == 0) weight++;
+                            //if ((result & 0b00010) == 0) weight++;
+                            //if ((result & 0b00001) == 0) weight++;
+
                             break;
                     }
 
@@ -140,7 +158,7 @@ namespace GroupClasses.Library.GroupCore
         {
             foreach (var filter in FilterService.Filters)
             {
-                if (groupResult.VarianceResults[filter.DataValue.Id] >= filter.VarianceLimit)
+                if (groupResult.VarianceResults[filter.DataValue.Id] > filter.VarianceLimit)
                 {
                     return false;
                 }

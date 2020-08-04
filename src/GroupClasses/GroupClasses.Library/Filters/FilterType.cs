@@ -5,5 +5,6 @@ namespace GroupClasses.Library.Filters
     {
         Average,
         Ratio,
+        Condition,
     }
 }

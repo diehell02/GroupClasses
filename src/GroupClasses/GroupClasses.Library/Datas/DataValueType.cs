@@ -5,5 +5,6 @@ namespace GroupClasses.Library.Datas
     {
         Number,
         String,
+        Binary,
     }
 }
