@@ -141,60 +141,60 @@ namespace GroupClasses.ConsoleClient
         {
             IWorkbook workbook = null;
 
-            var fs = File.OpenWrite(path);
-
-            if (path.IndexOf(".xlsx") > 0) // 2007版本 
+            using (var fs = File.Create(path))
             {
-                workbook = new XSSFWorkbook();
-            }
-            else if (path.IndexOf(".xls") > 0) // 2003版本
-            {
-                workbook = new HSSFWorkbook();
-            }
-
-            for (var i = 0; i < datas.Length; i++)
-            {
-                var _class = datas[i];
-                ISheet sheet = workbook.CreateSheet($"Class{i}");
-
-                int rowIndex = 0;
-                int colIndex = 0;
-
-                var row = sheet.CreateRow(rowIndex++);
-
-                foreach(var header in dataService.Values)
+                if (path.IndexOf(".xlsx") > 0) // 2007版本 
                 {
-                    row.CreateCell(colIndex++).SetCellValue(header.Name);
+                    workbook = new XSSFWorkbook();
+                }
+                else if (path.IndexOf(".xls") > 0) // 2003版本
+                {
+                    workbook = new HSSFWorkbook();
                 }
 
-                foreach (var data in _class)
+                for (var i = 0; i < datas.Length; i++)
                 {
-                    colIndex = 0;
-                    row = sheet.CreateRow(rowIndex++);
+                    var _class = datas[i];
+                    ISheet sheet = workbook.CreateSheet($"Class{i}");
 
-                    for (int z = 0; z < data.Values.Count(); z++)
+                    int rowIndex = 0;
+                    int colIndex = 0;
+
+                    var row = sheet.CreateRow(rowIndex++);
+
+                    foreach (var header in dataService.Values)
                     {
-                        var value = data.Values[z];
+                        row.CreateCell(colIndex++).SetCellValue(header.Name);
+                    }
 
-                        switch (value.Key.Type)
+                    foreach (var data in _class)
+                    {
+                        colIndex = 0;
+                        row = sheet.CreateRow(rowIndex++);
+
+                        for (int z = 0; z < data.Values.Count(); z++)
                         {
-                            case DataValueType.String:
-                                row.CreateCell(colIndex++).SetCellValue(value.Value.ToString());
-                                break;
-                            case DataValueType.Number:
-                                row.CreateCell(colIndex++).SetCellValue(Convert.ToDouble(value.Value));
-                                break;
-                            default:
-                                row.CreateCell(colIndex++).SetCellValue(value.Value.ToString());
-                                break;
+                            var value = data.Values[z];
+
+                            switch (value.Key.Type)
+                            {
+                                case DataValueType.String:
+                                    row.CreateCell(colIndex++).SetCellValue(value.Value.ToString());
+                                    break;
+                                case DataValueType.Number:
+                                    row.CreateCell(colIndex++).SetCellValue(Convert.ToDouble(value.Value));
+                                    break;
+                                default:
+                                    row.CreateCell(colIndex++).SetCellValue(value.Value.ToString());
+                                    break;
+                            }
                         }
                     }
                 }
+
+                workbook.Write(fs);
+                fs.Close();
             }
-
-            workbook.Write(fs);
-
-            fs.Close();
         }
     }
 }

@@ -61,7 +61,7 @@ namespace GroupClasses.Library.GroupCore
                             }
                             break;
                         case FilterType.Condition:
-                            byte result = 0b11111;
+                            byte result = 0b00000;
                             switch (dataValueType)
                             {
                                 case DataValueType.Binary:
@@ -71,11 +71,11 @@ namespace GroupClasses.Library.GroupCore
                                     break;
                             }
 
-                            //if ((result & 0b10000) == 0) weight++;
-                            //if ((result & 0b01000) == 0) weight++;
-                            //if ((result & 0b00100) == 0) weight++;
-                            //if ((result & 0b00010) == 0) weight++;
-                            //if ((result & 0b00001) == 0) weight++;
+                            if ((result & 0b10000) == 0b10000) weight++;
+                            if ((result & 0b01000) == 0b01000) weight++;
+                            if ((result & 0b00100) == 0b00100) weight++;
+                            if ((result & 0b00010) == 0b00010) weight++;
+                            if ((result & 0b00001) == 0b00001) weight++;
 
                             break;
                     }
@@ -133,7 +133,7 @@ namespace GroupClasses.Library.GroupCore
                 Dictionary<int, decimal> weightDic = new Dictionary<int, decimal>();
 
                 Class[] classes = initClasses(datas, groupCount);
-                Class[] result = new Class[classes.Length];
+                Class[] result = null;
 
                 while (count > 0)
                 {
@@ -144,7 +144,17 @@ namespace GroupClasses.Library.GroupCore
                     if (groupResult.SumVariance < minWeight && IsPass(groupResult))
                     {
                         minWeight = groupResult.SumVariance;
-                        Array.Copy(classes, result, classes.Length);
+
+                        result = new Class[classes.Length];
+
+                        for (var i = 0; i < classes.Length; i++)
+                        {
+                            var @class = classes[i];
+
+                            result[i] = new Class(@class.Datas.ToArray(), FilterService);
+                        }
+
+                        //Array.Copy(classes, result, classes.Length);
                     }
 
                     count--;
